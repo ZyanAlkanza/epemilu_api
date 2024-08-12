@@ -11,28 +11,28 @@ class Voters extends Model
 
     protected $fillable = [
         'nik',
-        'nama',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'agama',
-        'alamat',
+        'username',
+        'place_of_birth',
+        'date_of_birth',
+        'religion',
+        'address',
         'rt',
         'rw',
-        'kelurahan',
-        'kecamatan',
-        'kota',
-        'provinsi',
-        'pekerjaan',
-        'jenis_kelamin',
-        'golongan_darah',
-        'sandi',
+        'village',
+        'subdistrict',
+        'city',
+        'province',
+        'job',
+        'gender',
+        'blood_type',
+        'password',
     ];
 
     protected $hidden = [
-        'sandi',
+        'password',
     ];
 
     protected $casts = [
-        'sandi' => 'hased',
+        'password' => 'hased',
     ];
 }

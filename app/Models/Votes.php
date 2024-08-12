@@ -12,6 +12,6 @@ class Votes extends Model
     protected $fillable = [
         'nik',
         'candidate_id',
-        'tahun_pemilihan'
+        'election_year'
     ];
 }

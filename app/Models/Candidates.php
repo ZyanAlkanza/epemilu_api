@@ -10,9 +10,9 @@ class Candidates extends Model
     use HasFactory;
 
     protected $fillable = [
-        'no_urut',
-        'nama_presiden',
-        'nama_wakil',
-        'periode'
+        'number',
+        'president_name',
+        'vice_president_name',
+        'period'
     ];
 }

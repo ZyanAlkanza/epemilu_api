@@ -19,8 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nik',
-        'nama',
-        'sandi',
+        'username',
+        'password',
     ];
 
     /**
@@ -29,7 +29,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'sandi',
+        'password',
     ];
 
     /**
@@ -38,6 +38,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'sandi' => 'hashed',
+        'password' => 'hashed',
     ];
 }

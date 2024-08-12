@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->char('no_urut', 1)->unique();
-            $table->string('nama_presiden');
-            $table->string('nama_wakil');
-            $table->year('periode');
+            $table->char('number', 1)->unique();
+            $table->string('president_name');
+            $table->string('vice_president_name');
+            $table->year('period');
             $table->timestamps();
         });
     }

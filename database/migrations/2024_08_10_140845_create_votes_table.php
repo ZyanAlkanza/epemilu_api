@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('nik', 16);
             $table->foreign('nik')->references('nik')->on('voters');
             $table->foreignId('candidate_id')->constrained();
-            $table->year('tahun_pemilihan');
+            $table->year('election_year');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('votes_');
+        Schema::dropIfExists('votes');
     }
 };

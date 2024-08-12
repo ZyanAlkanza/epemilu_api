@@ -12,22 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('voters', function (Blueprint $table) {
+            $table->id();
             $table->char('nik', 16)->unique();
-            $table->string('nama');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('agama');
-            $table->text('alamat');
+            $table->string('username');
+            $table->string('place_of_birth');
+            $table->date('date_of_birth');
+            $table->string('religion');
+            $table->text('address');
             $table->char('rt', 3);
             $table->char('rw', 3);
-            $table->string('kelurahan');
-            $table->string('kecamatan');
-            $table->string('kota');
-            $table->string('provinsi');
-            $table->string('pekerjaan');
-            $table->char('jenis_kelamin', 1);
-            $table->char('golongan_darah', 2);
-            $table->string('sandi');
+            $table->string('village');
+            $table->string('subdistrict');
+            $table->string('city');
+            $table->string('province');
+            $table->string('job');
+            $table->char('gender', 1);
+            $table->char('blood_type', 2);
+            $table->string('password');
             $table->timestamps();
         });
     }
