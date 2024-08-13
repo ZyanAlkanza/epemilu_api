@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Voters extends Model
+class Voter extends Authenticatable
 {
     use HasFactory;
 
@@ -33,6 +34,6 @@ class Voters extends Model
     ];
 
     protected $casts = [
-        'password' => 'hased',
+        'password' => 'hashed',
     ];
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Voter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use function Laravel\Prompts\error;
@@ -30,18 +33,31 @@ class AuthController extends Controller
             ], 401);
         }
 
-        if(Auth::attempt($request->only('username', 'nik', 'password'))){
-            $user = Auth::user();
+        $voter = Voter::where('nik', $request->nik)->first();
+
+        if($voter && Hash::check($request->password, $voter->password ) && $voter->username == $request->username ){
+            Auth::login($voter);
             return response()->json([
                 'status'        => true,
-                'message'       => 'Login berhasil',
+                'message'       => 'Login berhasil, Selamat datang pemilih!',
+                'data'          => $voter
+            ], 200);
+        }
+
+        $user = User::where('nik', $request->nik)->first();
+
+        if($user && Hash::check($request->password, $user->password) && $user->username == $request->username){
+            Auth::login($user);
+            return response()->json([
+                'status'        => true,
+                'message'       => 'Login berhasil, Selamat datang admin!',
                 'data'          => $user
             ], 200);
-        }else{
-            return response()->json([
-                'status'        => false,
-                'message'       => 'Login gagal',
-            ], 400);
         }
+
+        return response()->json([
+            'status'        => false,
+            'message'       => 'Login gagal',
+        ], 400);
     }
 }
