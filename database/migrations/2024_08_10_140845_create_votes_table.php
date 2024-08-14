@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->char('nik', 16);
-            $table->foreign('nik')->references('nik')->on('voters');
+            $table->foreign('nik')->references('nik')->on('users');
             $table->foreignId('candidate_id')->constrained();
             $table->year('election_year');
             $table->timestamps();

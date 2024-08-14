@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-use function Laravel\Prompts\error;
-
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -33,25 +31,15 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $voter = Voter::where('nik', $request->nik)->first();
-
-        if($voter && Hash::check($request->password, $voter->password ) && $voter->username == $request->username ){
-            Auth::login($voter);
+        if(Auth::attempt($request->only(['username', 'nik', 'password']))){
+            $user = Auth::user();
+            $user->tokens()->delete();
+            $token = $user->createToken('Personal Access Token')->plainTextToken;
             return response()->json([
-                'status'        => true,
-                'message'       => 'Login berhasil, Selamat datang pemilih!',
-                'data'          => $voter
-            ], 200);
-        }
-
-        $user = User::where('nik', $request->nik)->first();
-
-        if($user && Hash::check($request->password, $user->password) && $user->username == $request->username){
-            Auth::login($user);
-            return response()->json([
-                'status'        => true,
-                'message'       => 'Login berhasil, Selamat datang admin!',
-                'data'          => $user
+                'status'  => true,
+                'message' => 'Login Berhasil',
+                'data'    => $user,
+                'token'   => $token
             ], 200);
         }
 
@@ -60,4 +48,24 @@ class AuthController extends Controller
             'message'       => 'Login gagal',
         ], 400);
     }
+
+    public function logout()
+{
+    $user = Auth::user();
+
+    if ($user) {
+        $user->tokens()->delete();
+
+        return response()->json([
+            'status'  => true,
+            'message' => 'Logout berhasil'
+        ], 200);
+    }
+
+    return response()->json([
+        'status'  => false,
+        'message' => 'Logout gagal'
+    ], 401);
+}
+
 }

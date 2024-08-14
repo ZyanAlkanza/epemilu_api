@@ -20,6 +20,20 @@ class User extends Authenticatable
     protected $fillable = [
         'nik',
         'username',
+        'place_of_birth',
+        'date_of_birth',
+        'religion',
+        'address',
+        'rt',
+        'rw',
+        'village',
+        'subdistrict',
+        'city',
+        'province',
+        'job',
+        'gender',
+        'blood_type',
+        'role',
         'password',
     ];
 
