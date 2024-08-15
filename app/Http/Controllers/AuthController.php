@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Voter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -50,22 +47,22 @@ class AuthController extends Controller
     }
 
     public function logout()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if ($user) {
-        $user->tokens()->delete();
+        if ($user) {
+            $user->tokens()->delete();
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Logout berhasil'
+            ], 200);
+        }
 
         return response()->json([
-            'status'  => true,
-            'message' => 'Logout berhasil'
-        ], 200);
+            'status'  => false,
+            'message' => 'Logout gagal'
+        ], 401);
     }
-
-    return response()->json([
-        'status'  => false,
-        'message' => 'Logout gagal'
-    ], 401);
-}
 
 }
