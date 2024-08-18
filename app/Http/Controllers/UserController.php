@@ -93,6 +93,24 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function show($id)
+    {
+        $data = User::where('id', $id)->first();
+
+        if(!$data){
+            return response()->json([
+                'status'    => false,
+                'message'   => 'Data tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Data berhasil ditampilkan',
+            'data'      => $data
+        ], 200);
+    }
+
     public function user($id)
     {
         $data = User::where('id', $id)->first();
