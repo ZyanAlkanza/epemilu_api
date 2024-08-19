@@ -35,5 +35,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::get('/user', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/addUser', [UserController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/user/{id}', [UserController::class, 'show']);
+Route::patch('/user/{id}', [UserController::class, 'update']);
 
 Route::get('/user/{id}', [UserController::class, 'user']);
