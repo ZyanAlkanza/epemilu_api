@@ -190,6 +190,24 @@ class UserController extends Controller
         }
     }
 
+    public function delete($id)
+    {
+        $user = User::where('id', $id);
+
+        if(!$user){
+            return response()->json([
+                'status'    => false,
+                'message'   => 'Data tidak ditemukan'
+            ], 404);
+        }else{
+            $user->delete();
+            return response()->json([
+                'status'    => true,
+                'message'   => 'Data berhasil dihapus'
+            ], 200);
+        }
+    }
+
     public function user($id)
     {
         $data = User::where('id', $id)->first();
